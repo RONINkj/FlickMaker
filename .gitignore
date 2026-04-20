@@ -1,0 +1,123 @@
+# ==============================
+
+# Python
+
+# ==============================
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+
+venv/
+.env/
+fvenv/
+ENV/
+env/
+
+# Python packaging
+
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ==============================
+
+# FastAPI / Logs
+
+# ==============================
+
+*.log
+*.sqlite3
+*.db
+
+# ==============================
+
+# Environment Variables
+
+# ==============================
+
+.env
+.env.*
+
+# ==============================
+
+# Image Uploads & Outputs (IMPORTANT for your project)
+
+# ==============================
+
+uploads/
+outputs/
+*.jpg
+*.jpeg
+*.png
+*.pdf
+
+# (Optional: If you want to keep sample images, comment above and use below)
+
+# uploads/*
+
+# !uploads/sample/
+
+# outputs/*
+
+# !outputs/sample/
+
+# ==============================
+
+# Node / React (if frontend used)
+
+# ==============================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build folders
+
+build/
+dist/
+
+# ==============================
+
+# OS Files
+
+# ==============================
+
+.DS_Store
+Thumbs.db
+
+# ==============================
+
+# IDE / Editor
+
+# ==============================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+
+# Misc
+
+# ==============================
+
+*.bak
+*.tmp
+*.temp
