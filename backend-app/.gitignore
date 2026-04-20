@@ -11,6 +11,7 @@
 # Virtual Environment
 
 venv/
+flick-venv/
 .env/
 fvenv/
 ENV/
