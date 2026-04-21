@@ -1,59 +1,41 @@
 from PIL import Image
 import os
-import math
 
 
 def generate_a4_layout(input_path: str, output_path: str, num_copies: int = 4) -> str:
     """
-        Genreate an a4 layout with mutliple copies of an image.
-
-    args:
-        input_path (str): Path to process image
-        output_path (str): Path to save A4 layout image
-        num_copies (int): Number of duplicates (e.g. 2, ,4 , 12 , 16)
-
-    retunrs:
-        str: Path of final A4 image
+    Generate an A4 layout with multiple copies of an image.
+    Image size MUST already be passport size (e.g., 413x531).
     """
-    # a4 size at  300 DPI
 
+    # A4 size at 300 DPI
     A4_WIDTH = 2480
     A4_HEIGHT = 3508
 
-    # open input image
+    # open input image (already resized)
     image = Image.open(input_path).convert("RGB")
-
-    img_width, img_height = image.size
-
-    # calculate grind (rows x cols)
-    cols = math.ceil(math.sqrt(num_copies))
-    rows = math.ceil(num_copies / cols)
+    img_w, img_h = image.size
 
     # margins
     margin_x = 100
     margin_y = 100
 
-    # available space inside margins
-    available_width = A4_WIDTH - 2 * margin_x
-    available_height = A4_HEIGHT - 2 * margin_y
-
-    # spcaing between images
+    # spacing between images
     spacing_x = 20
-    spcaing_y = 20
+    spacing_y = 20
 
-    # calculate max possible size image
-    max_width = (available_width - (cols - 1) * spacing_x) // cols
-    max_height = (available_height - (rows - 1) * spcaing_y) // rows
+    # ✅ calculate how many images fit in A4 (KEY FIX)
+    cols = (A4_WIDTH - 2 * margin_x + spacing_x) // (img_w + spacing_x)
+    rows = (A4_HEIGHT - 2 * margin_y + spacing_y) // (img_h + spacing_y)
 
-    # resize image to fit  inside grid cell (maintain ratio)
-    image.thumbnail((max_width, max_height))
+    # max images possible
+    max_copies = cols * rows
+
+    # limit copies
+    num_copies = min(num_copies, max_copies)
 
     # create A4 canvas
     canvas = Image.new("RGB", (A4_WIDTH, A4_HEIGHT), (255, 255, 255))
-
-    # start placing images
-    x_start = margin_x
-    y_start = margin_y
 
     count = 0
 
@@ -62,16 +44,16 @@ def generate_a4_layout(input_path: str, output_path: str, num_copies: int = 4) -
             if count >= num_copies:
                 break
 
-            x = x_start + col + (max_width + spacing_x)
-            y = y_start + row + (max_height + spcaing_y)
-            canvas.paste(image, (x, y))
+            x = margin_x + col * (img_w + spacing_x)
+            y = margin_y + row * (img_h + spacing_y)
 
+            canvas.paste(image, (x, y))
             count += 1
 
     # ensure directory exists
-    os.makedirs(os.path.dirname(output_path),exist_ok=True)
-    
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     # save final layout
-    canvas.save(output_path)
-    
+    canvas.save(output_path, dpi=(300, 300))
+
     return output_path
