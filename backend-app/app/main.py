@@ -8,7 +8,7 @@ app=FastAPI(title="FlickMaker",version="1.0.0")
 
 
 
-# app.include_router(process.router)
+app.include_router(process.router)
 
 
 

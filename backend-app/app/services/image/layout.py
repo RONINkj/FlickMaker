@@ -3,7 +3,7 @@ import os
 import math
 
 
-def genrate_a4_layout(input_path: str, output_path: str, num_copies: int = 4) -> str:
+def generate_a4_layout(input_path: str, output_path: str, num_copies: int = 4) -> str:
     """
         Genreate an a4 layout with mutliple copies of an image.
 

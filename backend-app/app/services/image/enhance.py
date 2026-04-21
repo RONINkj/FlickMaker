@@ -2,7 +2,7 @@ from PIL import Image, ImageEnhance
 import os
 
 
-def enhace_image(input_path: str, output_path: str, brightness: float = 1.1, contrast: float = 1.2, sharpness: float = 1.1) -> str:
+def enhance_image(input_path: str, output_path: str, brightness: float = 1.1, contrast: float = 1.2, sharpness: float = 1.1) -> str:
     """
     Enhances image using basic adjustments.
     args:
