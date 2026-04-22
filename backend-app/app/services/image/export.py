@@ -1,24 +1,42 @@
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 from PIL import Image
 import os
 
 
 def export_to_pdf(input_path: str, output_path: str) -> str:
     """
-    Convert an a4 image into print-ready PDF
-    args:
-        input_path (str): Path to A4 layout image
-        output_path (str): Path to  save PDF file
-
-    returns:
-        str: Path of genrated PDF
+    Export A4 image to PDF with correct scaling (300 DPI → 72 DPI)
     """
-    # open image
-    image = Image.open(input_path).convert("RGB")
 
-    # ensure output directory exits
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-    # save as pdf with 300 DPI
-    image.save(output_path, "PDF", resolution=300.0)
+    # A4 in points (72 DPI)
+    A4_WIDTH, A4_HEIGHT = A4
+
+    c = canvas.Canvas(output_path, pagesize=A4)
+    c.setTitle("FlickMaker Output")
+    
+    # open image
+    img = Image.open(input_path)
+    img_w_px, img_h_px = img.size
+
+    # convert pixels (300 DPI) → points (72 DPI)
+    scale = 72 / 300
+
+    img_w_pt = img_w_px * scale
+    img_h_pt = img_h_px * scale
+
+    # draw image correctly scaled
+    c.drawImage(
+        input_path,
+        0,
+        A4_HEIGHT - img_h_pt,
+        width=img_w_pt,
+        height=img_h_pt
+    )
+
+    c.showPage()
+    c.save()
 
     return output_path
