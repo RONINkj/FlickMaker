@@ -92,8 +92,8 @@ async def process_photo(background_tasks: BackgroundTasks, file: UploadFile = Fi
     return FileResponse(
         final_pdf_path,
         media_type="application/pdf",
-        # filename="FlickMaker_output.pdf"
-        headers={
-            "Content-Disposition": "inline"
-        }
+        filename="FlickMaker_output.pdf"
+        # headers={
+        #     "Content-Disposition": "inline"
+        # }
     )
