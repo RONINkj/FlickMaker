@@ -4,3 +4,6 @@ FlickMaker - Project
     - flick-venv\Scripts\activate
 - backend running command
     - uvicorn app.main:app --reload
+
+
+- run frontend - npm run dev
