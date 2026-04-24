@@ -32,6 +32,33 @@ def cleanup_files(path: str):
         shutil.rmtree(path)
 
 
+def cleanup_uploads(upload_dir: str, max_files: int = 5):
+    if not os.path.exists(upload_dir):
+        return
+
+    files = [
+        os.path.join(upload_dir, f)
+        for f in os.listdir(upload_dir)
+        if os.path.isfile(os.path.join(upload_dir, f))
+    ]
+
+    # If files <= limit → do nothing
+    if len(files) <= max_files:
+        return
+
+    # Sort by last modified time (oldest first)
+    files.sort(key=lambda x: os.path.getmtime(x))
+
+    # Delete oldest files
+    files_to_delete = files[:len(files) - max_files]
+
+    for file_path in files_to_delete:
+        try:
+            os.remove(file_path)
+        except Exception as e:
+            print(f"Error deleting file {file_path}: {e}")
+
+
 @router.post("/process-photo")
 async def process_photo(background_tasks: BackgroundTasks, file: UploadFile = File(...), num_copies: int = Form(4), background_color: str = Form("white")):
     # Validate file type
@@ -57,6 +84,9 @@ async def process_photo(background_tasks: BackgroundTasks, file: UploadFile = Fi
     # Save uploaded file
     with open(upload_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
+
+    # CALL CLEANUP HERE
+    cleanup_uploads(UPLOAD_DIR)
 
     # Step 1: Remove background
     bg_removed_path = os.path.join(job_output_dir, "bg_removed.png")
@@ -93,7 +123,5 @@ async def process_photo(background_tasks: BackgroundTasks, file: UploadFile = Fi
         final_pdf_path,
         media_type="application/pdf",
         filename="FlickMaker_output.pdf"
-        # headers={
-        #     "Content-Disposition": "inline"
-        # }
+       
     )
