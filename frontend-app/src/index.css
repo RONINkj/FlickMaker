@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
+
+@keyframes glowBorder {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 0, 128, 0.3);
+    border-color: rgba(255, 0, 128, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 128, 0.7);
+    border-color: rgba(255, 0, 128, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(255, 0, 128, 0.3);
+    border-color: rgba(255, 0, 128, 0.4);
+  }
+}
+
+.animate-glow {
+  animation: glowBorder 1.5s ease-in-out infinite;
+}
