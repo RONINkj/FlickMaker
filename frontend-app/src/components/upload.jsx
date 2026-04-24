@@ -30,7 +30,7 @@ const Upload = () => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("num_copies", numCopies);
-        formData.append("background_color", bgColor);
+        formData.append("background_color", bgColor.toLowerCase());
 
         try {
             setLoading(true);

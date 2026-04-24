@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Form
 from fastapi.responses import FileResponse
 import os
 import shutil
@@ -33,7 +33,7 @@ def cleanup_files(path: str):
 
 
 @router.post("/process-photo")
-async def process_photo(background_tasks: BackgroundTasks, file: UploadFile = File(...), num_copies: int = 4, background_color: str = "white"):
+async def process_photo(background_tasks: BackgroundTasks, file: UploadFile = File(...), num_copies: int = Form(4), background_color: str = Form("white")):
     # Validate file type
     if not file.content_type.startswith("image/"):
         raise HTTPException(
