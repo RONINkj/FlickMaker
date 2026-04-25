@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { processPhoto } from "../services/api";
-import Controls from "./Controls";
+import Controls from "./controls";
 import Result from "./Result";
 
 const Upload = () => {
