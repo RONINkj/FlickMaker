@@ -1,5 +1,5 @@
 export const processPhoto = async (formData) => {
-    const response = await fetch("http://127.0.0.1:8000/process-photo", {
+    const response = await fetch("https://flickmaker.onrender.com/process-photo", {
         method: "POST",
         body: formData,
         headers: {
