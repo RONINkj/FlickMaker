@@ -1,4 +1,7 @@
-# 📸 FlickMaker
+<p>
+  <img src="frontend-app/public/favicon.png" width="60" style="vertical-align: middle; margin-right: 10px;" />
+  <span style="font-size: 28px; font-weight: bold;">FlickMaker</span>
+</p>
 
 FlickMaker is a full-stack web application that allows users to generate professional passport-size photo sheets instantly.
 
