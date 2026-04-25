@@ -1,8 +1,8 @@
-from rembg import remove
 from PIL import Image
 import os
 
 def remove_background(input_path: str, output_path: str) -> str:
+    from rembg import remove
     # open image
     input_image = Image.open(input_path)
 
