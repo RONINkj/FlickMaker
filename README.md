@@ -44,6 +44,14 @@ FlickMaker/
 │   ├── app/
 │   │   ├── routes/
 │   │   ├── services/
+|   |   |    ├── image/
+|   |   |       ├── bg_remove.py
+|   |   |       ├── bg_replace.py
+|   |   |       ├── enhance.py
+|   |   |       ├── resize.py
+|   |   |       ├── layout.py
+|   |   |       ├── export.py
+|   |   |        
 │   │   └── main.py
 │   ├── uploads/
 │   ├── outputs/
@@ -51,6 +59,17 @@ FlickMaker/
 │
 ├── frontend-app/
 │   ├── src/
+|   |    ├── App.jsx
+|   |    ├── index.css
+|   |    ├── main.jsx
+|   |    ├── components/
+|   |    |   ├── header.jsx
+|   |    |   ├── controls.jsx
+|   |    |   ├── upload.jsx
+|   |    |   ├── result.jsx
+|   |    |   ├── footer.jsx
+|   |    ├── services/
+|   |        ├── api.jsx
 │   ├── public/
 │   └── package.json
 ```
